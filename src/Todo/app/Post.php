@@ -37,4 +37,18 @@ class Post {
         return $result;
     }
 
+    public function create(){
+        $dbh = $this->db_access();
+
+        $sql ="INSERT INTO posts ('title','body') VALUES(:title,:body)";
+        
+        //準備段階
+        $stmt = $dbh->prepare($sql);
+
+        //実行
+        $stmt->execute();
+        $result =$stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
 }

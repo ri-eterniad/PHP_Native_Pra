@@ -40,7 +40,6 @@ class Post {
 
 $model = new Post();
 $result = $model->index();
-
 $posts = $result;
 // var_dump($posts[0]);
 ?>

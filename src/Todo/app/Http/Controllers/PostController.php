@@ -15,11 +15,21 @@
 
 echo "test";
 class PostController {
+
+    public function __construct($models,$views)
+    {
+        $this->models =$models;
+        $this->views =$views; 
+    }
+
+
     public function index(){
 
-        echo "index";
-        
-
+        include($this->models."Post.php");
+        $model = new Post();
+        $result = $model->index();
+        $posts = $result;
+        include($this->views."posts/index.php");
     }
 
     public function create(){

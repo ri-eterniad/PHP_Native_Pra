@@ -12,8 +12,6 @@
 //     $result =$stmt->fetchAll(PDO::FETCH_ASSOC);
 //     return $result;
 // }
-
-echo "test";
 class PostController {
 
     public function __construct($models,$views)
@@ -22,9 +20,18 @@ class PostController {
         $this->views =$views; 
     }
 
+    public function layouts(){
+
+        $values =array(
+            "layouts" => $this->views."layouts/"
+        );
+        return $values;
+    }
+
 
     public function index(){
 
+        $values =$this->layouts();
         include($this->models."Post.php");
         $model = new Post();
         $result = $model->index();
@@ -33,6 +40,22 @@ class PostController {
     }
 
     public function create(){
-        echo "crate";
+        $values =$this->layouts();
+        include($this->models."Post.php");
+        $model = new Post();
+        $result = $model->index();
+        $posts = $result;
+        include($this->views."posts/create.php");
     }
+    
+
+    public function edit(){
+        $values =$this->layouts();
+        include($this->models."Post.php");
+        $model = new Post();
+        $result = $model->index();
+        $posts = $result;
+        include($this->views."posts/edit.php");
+    }
+    
 }

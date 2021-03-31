@@ -23,6 +23,9 @@ switch ($params[0]){
     case "create";
         $postcontroller->create();
         break;
+    case "edit";
+        $postcontroller->edit();
+        break;
 }
 
 

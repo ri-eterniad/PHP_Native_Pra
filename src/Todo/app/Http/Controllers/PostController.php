@@ -39,6 +39,16 @@ class PostController {
         include($this->views."posts/index.php");
     }
 
+    public function store(){
+
+        $values =$this->layouts();
+        include($this->models."Post.php");
+        $model = new Post();
+        $result = $model->store();
+        $posts = $result;
+        include($this->views."posts/create.php");
+    }
+
     public function create(){
         $values =$this->layouts();
         include($this->models."Post.php");

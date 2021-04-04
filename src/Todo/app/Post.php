@@ -37,6 +37,28 @@ class Post {
         return $result;
     }
 
+    public function store(){
+        $dbh = $this->db_access();
+        //中途半端なデータが保存されたりすることを防ぐ
+        try{
+            $dbh->beginTransaction();
+            $sql ="INSERT INTO posts(title,body) VALUES(:title,:body)";
+        //準備段階
+            $stmt = $dbh->prepare($sql);
+            $stmt->bindValue(':title',$_POST['title'],PDO::PARAM_STR);
+            $stmt->bindValue(':body',$_POST['body'],PDO::PARAM_STR);
+            //実行
+            $stmt->execute();
+            $dbh->commit();
+            }catch(PDOException $Exception){
+                $dbh->rollBack();
+            }
+
+        
+        $result = array($_POST['title'],$_POST['body']);
+        return $result;
+    }
+
     public function create(){
         $dbh = $this->db_access();
 

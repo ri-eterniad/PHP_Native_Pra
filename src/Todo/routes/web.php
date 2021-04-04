@@ -19,12 +19,14 @@ switch ($params[0]){
     case "";
         $postcontroller->index();
         break;
-
     case "create";
         $postcontroller->create();
         break;
     case "edit";
         $postcontroller->edit();
+        break;
+    case "store";
+        $postcontroller->store();
         break;
 }
 

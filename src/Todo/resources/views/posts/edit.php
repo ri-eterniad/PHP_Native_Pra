@@ -1,4 +1,4 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
 <?php include($values["layouts"]."meta.php");?>
@@ -14,7 +14,8 @@
             <input class="form-control" 
                    type="text" 
                    name="title" 
-                   id="title">
+                   id="title"
+                   value="">
         </div>
         <div class="form-group my-4">
             <label class="font-weight-bold mb-4">詳細</label>

@@ -46,7 +46,7 @@ class PostController {
         $model = new Post();
         $result = $model->store();
         $posts = $result;
-        include($this->views."posts/create.php");
+        header('Location: http://192.168.33.12/');
     }
 
     public function create(){
@@ -83,7 +83,7 @@ class PostController {
         include($this->models."Post.php");
         $model = new Post();
         $result = $model->update($article_id);
-        include($this->views."posts/edit.php");
+        header('Location: http://192.168.33.12/');
     }
 
     public function destroy($article_id){

@@ -88,6 +88,20 @@ class Post {
         return $result;
     }
 
+    public function confirm($article_id){
+        $dbh = $this->db_access();
+
+        $sql ="SELECT * FROM posts WHERE id =:id";
+        //準備段階
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindValue(':id',$article_id,PDO::PARAM_INT);
+
+        //実行
+        $stmt->execute();
+        $result =$stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
     public function update($article_id){
         
         $dbh = $this->db_access();
@@ -109,5 +123,19 @@ class Post {
             }
         $result = array($_POST['title'],$_POST['body']);
         return $result;
+    }
+
+    public function destroy($article_id){
+        
+        $dbh = $this->db_access();
+
+        $sql ="DELETE FROM posts WHERE id =:id";
+        //準備段階
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindValue(':id',$article_id,PDO::PARAM_INT);
+
+        //実行
+        $stmt->execute();
+        return "削除が完了しました";
     }
 }

@@ -68,6 +68,16 @@ class PostController {
         include($this->views."posts/edit.php");
     }
 
+    public function confirm($article_id){
+
+        $values =$this->layouts();
+        include($this->models."Post.php");
+        $model = new Post();
+        $result = $model->confirm($article_id);
+        $posts = $result[0];
+        include($this->views."posts/confirm.php");
+    }
+
     public function update($article_id){
         $values =$this->layouts();
         include($this->models."Post.php");
@@ -75,5 +85,18 @@ class PostController {
         $result = $model->update($article_id);
         include($this->views."posts/edit.php");
     }
+
+    public function destroy($article_id){
+        $values =$this->layouts();
+        include($this->models."Post.php");
+        $model = new Post();
+        $result = $model->destroy($article_id);
+        header('Location: http://192.168.33.12/complete/');
+    }
     
+    public function complete(){
+
+        $values =$this->layouts();
+        include($this->views."posts/complete.php");
+    }
 }

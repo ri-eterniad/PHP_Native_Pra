@@ -20,7 +20,7 @@
             <div class="card-body">
                 <p>詳細：<?php echo $post['body'] ;?></p>
                 <a href="<?php echo "/edit/".$post['id']; ?>" class="btn btn-primary">編集する</a>
-                <a href="/destroy" class="btn btn-danger">削除する</a>
+                <a href="<?php echo "/confirm/".$post['id']; ?>" class="btn btn-danger">削除する</a>
             </div>
 
         </div>

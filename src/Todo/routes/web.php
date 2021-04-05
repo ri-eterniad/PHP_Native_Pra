@@ -31,6 +31,15 @@ switch ($params[0]){
     case "update";
         $postcontroller->update($params[1]);
         break;
+    case "confirm";
+        $postcontroller->confirm($params[1]);
+        break;
+    case "destroy";
+        $postcontroller->destroy($params[1]);
+        break;
+    case "complete";
+        $postcontroller->complete();
+        break;
 }
 
 

@@ -23,10 +23,13 @@ switch ($params[0]){
         $postcontroller->create();
         break;
     case "edit";
-        $postcontroller->edit();
+        $postcontroller->edit($params[1]);
         break;
     case "store";
         $postcontroller->store();
+        break;
+    case "update";
+        $postcontroller->update($params[1]);
         break;
 }
 

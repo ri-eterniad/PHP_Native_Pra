@@ -59,12 +59,20 @@ class PostController {
     }
     
 
-    public function edit(){
+    public function edit($article_id){
         $values =$this->layouts();
         include($this->models."Post.php");
         $model = new Post();
-        $result = $model->index();
-        $posts = $result;
+        $result = $model->edit($article_id);
+        $posts = $result[0];
+        include($this->views."posts/edit.php");
+    }
+
+    public function update($article_id){
+        $values =$this->layouts();
+        include($this->models."Post.php");
+        $model = new Post();
+        $result = $model->update($article_id);
         include($this->views."posts/edit.php");
     }
     

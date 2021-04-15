@@ -36,7 +36,7 @@ class Post {
             $error[]="本文を入力してください";
         }
 
-        if(empty($data_title) >100){
+        if(strlen($data_body) >100){
             $error[]="本文を1００文字以下にしてください";
         }
 
@@ -134,10 +134,20 @@ class Post {
     }
 
     public function update($article_id){
-        
-        $dbh = $this->db_access();
 
-        //中途半端なデータが保存されたりすることを防ぐ
+        $post = array(
+            "id" =>$article_id,
+            "title" => $_POST['title'],
+            "body" => $_POST['body']
+        );
+
+        $error = $this->validation($post['title'],$post['body']);
+
+        if(count($error)){
+        }else{
+            $dbh = $this->db_access();
+
+            //中途半端なデータが保存されたりすることを防ぐ
         try{
             $dbh->beginTransaction();
             $sql ="UPDATE posts SET title= :title, body= :body WHERE id= :id";
@@ -152,7 +162,10 @@ class Post {
             }catch(PDOException $Exception){
                 $dbh->rollBack();
             }
-        $result = array($_POST['title'],$_POST['body']);
+        }
+
+        
+        $result = array($post,$error);
         return $result;
     }
 

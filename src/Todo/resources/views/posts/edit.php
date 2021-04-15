@@ -5,9 +5,15 @@
 </head>
 <body>
 <?php include($values['layouts']."header.php");?>
+<?php var_dump($posts);?>
     <main>
     <div class="container mb-4">
     <h2 class="mt-4">編集画面</h2>
+    <h5 class="text-danger mt-4">
+        <?php foreach($error as $alert): ?>
+            <?php echo "※".$alert."<br>";?>
+        <?php endforeach; ?>
+    </h5>
     <form method="POST" action=<?php echo "/update/".$posts['id'];?>>
         <fieldset>
             <div class="form-group my-4">

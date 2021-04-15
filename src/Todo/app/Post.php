@@ -24,6 +24,25 @@ class Post {
         }
     }
 
+    protected function validation($data_title, $data_body){
+        //配列初期化
+        $error = array();
+
+        if(empty($data_title) || ctype_space($data_title)){
+            $error[]="タイトルを入力してください";
+        }
+
+        if(empty($data_body) || ctype_space($data_body)){
+            $error[]="本文を入力してください";
+        }
+
+        if(empty($data_title) >100){
+            $error[]="本文を1００文字以下にしてください";
+        }
+
+        return $error;
+    }
+
     public function index(){
         $dbh = $this->db_access();
 
@@ -38,7 +57,18 @@ class Post {
     }
 
     public function store(){
-        $dbh = $this->db_access();
+
+        $post = array(
+            "title" => $_POST['title'],
+            "body" => $_POST['body']
+        );
+
+        $error = $this->validation($post['title'],$post['body']);
+
+        if(count($error)){
+            //エラーログを飛ばす
+        }else{
+            $dbh = $this->db_access();
         //中途半端なデータが保存されたりすることを防ぐ
         try{
             $dbh->beginTransaction();
@@ -54,8 +84,9 @@ class Post {
                 $dbh->rollBack();
             }
 
+        }
         
-        $result = array($_POST['title'],$_POST['body']);
+        $result = array($post,$error);
         return $result;
     }
 

@@ -45,8 +45,14 @@ class PostController {
         include($this->models."Post.php");
         $model = new Post();
         $result = $model->store();
-        $posts = $result;
-        header('Location: http://192.168.33.12/');
+        $posts = $result[0];
+        $error = $result[1];
+
+        if(count(($error))){
+            include($this->views."posts/create.php");
+        }else{
+            header('Location: http://192.168.33.12/');
+        }
     }
 
     public function create(){
